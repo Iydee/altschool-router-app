@@ -66,9 +66,9 @@ function About() {
 //     return { hasError: true };
 //   }
 
-//   componentDidCatch(error, errorInfo) {
-//     // logErrorToMyService(error, errorInfo);
-//   }
+//   // componentDidCatch(error, errorInfo) {
+//   //   logErrorToMyService(error, errorInfo);
+//   // }
 
 //   render() {
 //     if (this.state.hasError) {
@@ -86,8 +86,11 @@ function User() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const users = data[0];
-    console.log(data);
+    fetch("https://randomuser.me/api/?page=3&results=10&seed=abc")
+      .then((data) => data.json())
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch(setError);
   }, []);
 
   const handleNext = (event) => {
@@ -154,32 +157,6 @@ function User() {
       </button>
     </div>
   );
-
-  // }
-
-  // return (
-  //   <section className="user-container">
-  //     <h1>User Page</h1>
-  //     <p>This is the User Page</p>
-  //     <div>
-  //       {users.length > 0 && (
-  //         <ul>
-  //           {users.map((user) => (
-  //             <li key={user.id}>{user.name}</li>
-  //           ))}
-  //         </ul>
-  //       )}
-  //     </div>
-  //     Click below to go to the{" "}
-  //     <a className="Nav" href="/about">
-  //       About Page
-  //     </a>
-  //     You can also click here to go to the{" "}
-  //     <a className="Nav" href="/">
-  //       Home Page
-  //     </a>
-  //   </section>
-  // );
 }
 
 function App() {
@@ -190,7 +167,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           {/* <ErrorBoundary> */}
-          <Route path="/user" element={<User />} />
+            <Route path="/user" element={<User />} />
           {/* </ErrorBoundary> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
