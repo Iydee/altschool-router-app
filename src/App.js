@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 function NotFound() {
@@ -71,7 +70,6 @@ function User() {
   // console.log(users);
 
   // const UsingFetch = () => {
-  const [users, setUsers] = useState([]);
 
   const fetchData = () => {
     fetch("https://randomuser.me/api/?page=3&results=10&seed=abc")
